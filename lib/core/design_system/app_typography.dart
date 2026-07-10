@@ -85,4 +85,16 @@ class AppTypography {
     fontWeight: FontWeight.w500,
     color: AppColors.textSecondary,
   );
+
+  static final TextStyle titleSmall = GoogleFonts.roboto(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textPrimary,
+  );
+
+  static final TextStyle labelSmall = GoogleFonts.roboto(
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textSecondary,
+  );
 }

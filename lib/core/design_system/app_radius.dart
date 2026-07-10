@@ -36,4 +36,7 @@ class AppRadius {
 
   /// Circular Avatar
   static const double avatar = 999.0;
+
+  /// Pill Buttons / Chips
+  static const double pill = 9999.0;
 }

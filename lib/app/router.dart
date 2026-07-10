@@ -10,19 +10,19 @@ class AppRouter {
 
   static final GoRouter router = GoRouter(
     initialLocation: RouteNames.splash,
-    routes: [
-      GoRoute(
-        path: RouteNames.splash,
-        builder: (context, state) => const SplashScreen(),
-      ),
-      GoRoute(
-        path: RouteNames.welcome,
-        builder: (context, state) => const WelcomeScreen(),
-      ),
-      GoRoute(
-        path: RouteNames.login,
-        builder: (context, state) => const LoginScreen(),
-      ),
-    ],
+      routes: [
+        GoRoute(
+          path: RouteNames.splash,
+          builder: (context, state) => const SplashScreen(),
+        ),
+        GoRoute(
+          path: RouteNames.welcome,
+          builder: (context, state) => const WelcomeScreen(),
+        ),
+        GoRoute(
+          path: RouteNames.login,
+          builder: (context, state) => const LoginScreen(),
+        ),
+      ],
   );
 }

@@ -1,6 +1,11 @@
 class AppSpacing {
   AppSpacing._();
 
+  // No Spacing
+  static const double none = 0.0;
+
+// Extra Extra Small
+  static const double xxs = 2.0;
   // Extra Small
   static const double xs = 4.0;
 

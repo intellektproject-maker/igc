@@ -52,7 +52,7 @@ class AppColors {
   static const Color border = Color(0xFFE5E7EB);
   static const Color divider = Color(0xFFF1F5F9);
   static const Color disabled = Color(0xFFBDBDBD);
-
+  static const Color overlay = Color(0x80000000);
   // ==========================================================
   // Shadow
   // ==========================================================
