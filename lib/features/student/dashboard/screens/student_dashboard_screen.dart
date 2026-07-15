@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/design_system/design_system.dart';
+
 import '../widgets/top_navigation/student_top_navigation.dart';
 import '../widgets/welcome/student_welcome_card.dart';
 import '../widgets/stats/student_stats_section.dart';
+import '../widgets/progress/student_progress_section.dart';
+import '../widgets/activities/student_recent_activities_section.dart';
+import '../widgets/events/student_upcoming_events_section.dart';
+import '../widgets/mentor/student_mentor_banner.dart';
+import '../widgets/connections/student_connections_section.dart';
+import '../widgets/quick_links/student_quick_links_section.dart';
+import '../widgets/recommended/student_recommended_section.dart';
 class StudentDashboardScreen extends StatelessWidget {
   const StudentDashboardScreen({super.key});
 
@@ -24,67 +32,116 @@ class StudentDashboardScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // ==========================
                   // Top Navigation
+                  // ==========================
                   const StudentTopNavigation(),
 
                   const SizedBox(height: AppSpacing.lg),
 
+                  // ==========================
                   // Welcome Card
+                  // ==========================
                   const StudentWelcomeCard(),
 
                   const SizedBox(height: AppSpacing.lg),
 
+                  // ==========================
                   // Statistics
+                  // ==========================
                   const StudentStatsSection(),
 
                   const SizedBox(height: AppSpacing.lg),
 
+                  // ==========================
                   // Dashboard Content
+                  // ==========================
                   if (isMobile)
                     const Column(
                       children: [
-                        SizedBox(),
+                        // Progress
+                        StudentProgressSection(),
+
                         SizedBox(height: AppSpacing.lg),
-                        SizedBox(),
+
+                        // Activities
+                        StudentRecentActivitiesSection(),
+
                         SizedBox(height: AppSpacing.lg),
-                        SizedBox(),
+
+                        // Events
+                        StudentUpcomingEventsSection(),
+
                         SizedBox(height: AppSpacing.lg),
-                        SizedBox(),
+
+                        // Mentor Banner
+                        StudentMentorBanner(),
+
                         SizedBox(height: AppSpacing.lg),
-                        SizedBox(),
+
+                        // Connections
+                        StudentConnectionsSection(),
+
                         SizedBox(height: AppSpacing.lg),
-                        SizedBox(),
+
+                        // Quick Links
+                        StudentQuickLinksSection(),
+
                         SizedBox(height: AppSpacing.lg),
-                        SizedBox(),
+
+                        // Recommended
+                        StudentRecommendedSection(),
                       ],
                     )
                   else
-                    const Row(
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
+                        // ==========================
+                        // Left Side
+                        // ==========================
+                        const Expanded(
                           flex: 3,
                           child: Column(
                             children: [
-                              SizedBox(),
+                              StudentProgressSection(),
+
                               SizedBox(height: AppSpacing.lg),
-                              SizedBox(),
+
+                              StudentRecentActivitiesSection(),
+
                               SizedBox(height: AppSpacing.lg),
+
+                              // Recommended Section
                               SizedBox(),
                             ],
                           ),
                         ),
-                        SizedBox(width: AppSpacing.lg),
-                        Expanded(
+
+                        const SizedBox(width: AppSpacing.lg),
+
+                        // ==========================
+                        // Right Side
+                        // ==========================
+                        const Expanded(
                           flex: 1,
                           child: Column(
                             children: [
-                              SizedBox(),
+                              StudentUpcomingEventsSection(),
+
                               SizedBox(height: AppSpacing.lg),
+
+                              // Mentor Banner
                               SizedBox(),
+
                               SizedBox(height: AppSpacing.lg),
+
+                              // Connections
                               SizedBox(),
+
                               SizedBox(height: AppSpacing.lg),
+
+                              // Quick Links
                               SizedBox(),
                             ],
                           ),
