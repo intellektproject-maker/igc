@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/design_system/design_system.dart';
-import '../../../shared/widgets/app_button.dart';
-import '../../../shared/widgets/app_text_field.dart';
-import '../../student/dashboard/screens/student_dashboard_screen.dart';
+import '../widgets/auth_background.dart';
+import '../widgets/auth_header.dart';
+import '../widgets/login_form.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -12,73 +12,56 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: Center(
-        child: SizedBox(
-          width: 400,
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.xl),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.school,
-                  size: 70,
-                  color: AppColors.primary,
-                ),
+      body: Stack(
+        children: [
+          const AuthBackground(),
 
-                const SizedBox(height: AppSpacing.xl),
+          SafeArea(
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(AppSpacing.xl),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 420,
+                  ),
+                  child: Card(
+                    elevation: 8,
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                      BorderRadius.circular(AppRadius.card),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppSpacing.xl),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const AuthHeader(),
 
-                Text(
-                  "Welcome Back",
-                  style: AppTypography.headlineLarge,
-                ),
+                          const SizedBox(
+                            height: AppSpacing.xxl,
+                          ),
 
-                const SizedBox(height: AppSpacing.sm),
+                          const LoginForm(),
 
-                Text(
-                  "Login to continue your journey",
-                  style: AppTypography.bodyMedium,
-                ),
+                          const SizedBox(
+                            height: AppSpacing.xl,
+                          ),
 
-                const SizedBox(height: AppSpacing.xxl),
-
-                const AppTextField(
-                  hintText: "User ID",
-                  prefixIcon: Icons.person_outline,
-                ),
-
-                const SizedBox(height: AppSpacing.lg),
-
-                const AppTextField(
-                  hintText: "Password",
-                  prefixIcon: Icons.lock_outline,
-                  obscureText: true,
-                ),
-
-                const SizedBox(height: AppSpacing.xxl),
-
-                AppButton(
-                  text: "Login",
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const StudentDashboardScreen(),
+                          Text(
+                            "Version 1.0.0",
+                            style: AppTypography.bodySmall.copyWith(
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
-
-                const SizedBox(height: AppSpacing.xl),
-
-                Text(
-                  "Version 1.0.0",
-                  style: AppTypography.bodySmall,
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
