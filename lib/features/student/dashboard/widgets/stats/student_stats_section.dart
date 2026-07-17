@@ -10,60 +10,70 @@ class StudentStatsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        int crossAxisCount = 4;
+        int crossAxisCount;
 
         if (constraints.maxWidth < 600) {
-          crossAxisCount = 2;
+          crossAxisCount = 1;
         } else if (constraints.maxWidth < 1000) {
           crossAxisCount = 2;
+        } else if (constraints.maxWidth < 1400) {
+          crossAxisCount = 2;
+        } else {
+          crossAxisCount = 4;
         }
 
-        return GridView.count(
+        return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: crossAxisCount,
-          crossAxisSpacing: AppSpacing.md,
-          mainAxisSpacing: AppSpacing.md,
-          childAspectRatio: constraints.maxWidth < 600 ? 0.9 : 1.25,
-          children: const [
-            StudentStatCard(
-              icon: Icons.emoji_events_outlined,
-              iconColor: Colors.orange,
-              iconBackground: Color(0xFFFFF3E0),
-              title: "Talent Score",
-              value: "845",
-              subtitle: "+25 this month",
-            ),
+          itemCount: 4,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: AppSpacing.md,
+            mainAxisSpacing: AppSpacing.md,
 
-            StudentStatCard(
-              icon: Icons.public,
-              iconColor: Colors.blue,
-              iconBackground: Color(0xFFE3F2FD),
-              title: "Global Rank",
-              value: "#42",
-              subtitle: "Top 5%",
-            ),
+            // 👇 Increased height to prevent overflow
+            childAspectRatio: 0.95,
+          ),
+          itemBuilder: (context, index) {
+            const cards = [
+              StudentStatCard(
+                icon: Icons.auto_graph_rounded,
+                iconColor: Color(0xFF1565C0),
+                iconBackground: Color(0xFFE3F2FD),
+                title: "Innovation Score",
+                value: "845",
+                subtitle: "+32 this month",
+              ),
+              StudentStatCard(
+                icon: Icons.emoji_events_rounded,
+                iconColor: Color(0xFFFF8F00),
+                iconBackground: Color(0xFFFFF8E1),
+                title: "Chapter Rank",
+                value: "#04",
+                subtitle: "Top 3%",
+              ),
+              StudentStatCard(
+                icon: Icons.lightbulb_outline_rounded,
+                iconColor: Color(0xFF2E7D32),
+                iconBackground: Color(0xFFE8F5E9),
+                title: "Projects",
+                value: "12",
+                subtitle: "3 Active",
+              ),
+              StudentStatCard(
+                icon: Icons.workspace_premium_rounded,
+                iconColor: Color(0xFF6A1B9A),
+                iconBackground: Color(0xFFF3E5F5),
+                title: "Skill Points",
+                value: "2,450",
+                subtitle: "Level 8",
+              ),
+            ];
 
-            StudentStatCard(
-              icon: Icons.task_alt,
-              iconColor: Colors.green,
-              iconBackground: Color(0xFFE8F5E9),
-              title: "Activities",
-              value: "18",
-              subtitle: "Completed",
-            ),
-
-            StudentStatCard(
-              icon: Icons.workspace_premium_outlined,
-              iconColor: Colors.purple,
-              iconBackground: Color(0xFFF3E5F5),
-              title: "Certificates",
-              value: "12",
-              subtitle: "Earned",
-            ),
-          ],
+            return cards[index];
+          },
         );
-      },
+      }, 
     );
   }
 }
