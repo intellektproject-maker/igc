@@ -5,6 +5,7 @@ import '../../../../core/design_system/design_system.dart';
 import '../widgets/top_navigation/student_top_navigation.dart';
 import '../widgets/welcome/student_welcome_card.dart';
 import '../widgets/stats/student_stats_section.dart';
+import '../widgets/mission/student_today_mission_section.dart';
 import '../widgets/progress/student_progress_section.dart';
 import '../widgets/activities/student_recent_activities_section.dart';
 import '../widgets/events/student_upcoming_events_section.dart';
@@ -12,6 +13,7 @@ import '../widgets/mentor/student_mentor_banner.dart';
 import '../widgets/connections/student_connections_section.dart';
 import '../widgets/quick_links/student_quick_links_section.dart';
 import '../widgets/recommended/student_recommended_section.dart';
+
 class StudentDashboardScreen extends StatelessWidget {
   const StudentDashboardScreen({super.key});
 
@@ -40,7 +42,7 @@ class StudentDashboardScreen extends StatelessWidget {
                   const SizedBox(height: AppSpacing.lg),
 
                   // ==========================
-                  // Welcome Card
+                  // Welcome Banner
                   // ==========================
                   const StudentWelcomeCard(),
 
@@ -53,12 +55,14 @@ class StudentDashboardScreen extends StatelessWidget {
 
                   const SizedBox(height: AppSpacing.lg),
 
-                  // ==========================
-                  // Dashboard Content
-                  // ==========================
                   if (isMobile)
                     const Column(
                       children: [
+                        // Today's Mission
+                        StudentTodayMissionSection(),
+
+                        SizedBox(height: AppSpacing.lg),
+
                         // Progress
                         StudentProgressSection(),
 
@@ -74,7 +78,7 @@ class StudentDashboardScreen extends StatelessWidget {
 
                         SizedBox(height: AppSpacing.lg),
 
-                        // Mentor Banner
+                        // Mentor
                         StudentMentorBanner(),
 
                         SizedBox(height: AppSpacing.lg),
@@ -98,22 +102,29 @@ class StudentDashboardScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // ==========================
-                        // Left Side
+                        // LEFT SIDE
                         // ==========================
                         const Expanded(
                           flex: 3,
                           child: Column(
                             children: [
+                              // Today's Mission
+                              StudentTodayMissionSection(),
+
+                              SizedBox(height: AppSpacing.lg),
+
+                              // Progress
                               StudentProgressSection(),
 
                               SizedBox(height: AppSpacing.lg),
 
+                              // Activities
                               StudentRecentActivitiesSection(),
 
                               SizedBox(height: AppSpacing.lg),
 
-                              // Recommended Section
-                              SizedBox(),
+                              // Recommended
+                              StudentRecommendedSection(),
                             ],
                           ),
                         ),
@@ -121,28 +132,29 @@ class StudentDashboardScreen extends StatelessWidget {
                         const SizedBox(width: AppSpacing.lg),
 
                         // ==========================
-                        // Right Side
+                        // RIGHT SIDE
                         // ==========================
                         const Expanded(
                           flex: 1,
                           child: Column(
                             children: [
+                              // Events
                               StudentUpcomingEventsSection(),
 
                               SizedBox(height: AppSpacing.lg),
 
-                              // Mentor Banner
-                              SizedBox(),
+                              // Mentor
+                              StudentMentorBanner(),
 
                               SizedBox(height: AppSpacing.lg),
 
                               // Connections
-                              SizedBox(),
+                              StudentConnectionsSection(),
 
                               SizedBox(height: AppSpacing.lg),
 
                               // Quick Links
-                              SizedBox(),
+                              StudentQuickLinksSection(),
                             ],
                           ),
                         ),
