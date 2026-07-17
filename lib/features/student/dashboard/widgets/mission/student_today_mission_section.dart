@@ -9,42 +9,63 @@ class StudentTodayMissionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const totalMissions = 3;
+    const completedMissions = 1;
+    const progress = completedMissions / totalMissions;
+
     return DashboardCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const DashboardSectionHeader(
+          DashboardSectionHeader(
             title: "Today's Mission",
-            subtitle: "Complete your daily innovation goals",
+            subtitle: "$completedMissions of $totalMissions missions completed",
+            actionText: "View All",
+            onAction: () {},
           ),
 
           const SizedBox(height: AppSpacing.lg),
 
           _missionTile(
             title: "Continue AI Learning Module",
-            icon: Icons.play_circle_outline,
+            xp: "+50 XP",
+            icon: Icons.play_circle_outline_rounded,
             completed: true,
           ),
 
           const SizedBox(height: AppSpacing.md),
 
           _missionTile(
-            title: "Attend Robotics Workshop",
-            icon: Icons.event_available_outlined,
+            title: "Submit Innovation Project",
+            xp: "+100 XP",
+            icon: Icons.lightbulb_outline_rounded,
           ),
 
           const SizedBox(height: AppSpacing.md),
 
           _missionTile(
-            title: "Meet Your Mentor",
-            icon: Icons.people_outline,
+            title: "Attend Chapter Meeting",
+            xp: "+30 XP",
+            icon: Icons.groups_outlined,
           ),
 
           const SizedBox(height: AppSpacing.xl),
 
-          Text(
-            "Today's Progress",
-            style: AppTypography.titleMedium,
+          Row(
+            children: [
+              Text(
+                "Today's Progress",
+                style: AppTypography.titleMedium,
+              ),
+              const Spacer(),
+              Text(
+                "${(progress * 100).toInt()}%",
+                style: AppTypography.titleMedium.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
 
           const SizedBox(height: AppSpacing.sm),
@@ -52,16 +73,34 @@ class StudentTodayMissionSection extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(AppRadius.pill),
             child: const LinearProgressIndicator(
-              value: 0.33,
+              value: progress,
               minHeight: 8,
             ),
           ),
 
-          const SizedBox(height: AppSpacing.sm),
+          const SizedBox(height: AppSpacing.md),
 
-          Text(
-            "1 of 3 missions completed",
-            style: AppTypography.bodySmall,
+          Container(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              color: AppColors.primary.withOpacity(.06),
+              borderRadius: BorderRadius.circular(AppRadius.card),
+            ),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.tips_and_updates_outlined,
+                  color: AppColors.primary,
+                ),
+                const SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Text(
+                    "Keep going! Completing all today's missions earns bonus Innovation XP.",
+                    style: AppTypography.bodySmall,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -70,27 +109,63 @@ class StudentTodayMissionSection extends StatelessWidget {
 
   Widget _missionTile({
     required String title,
+    required String xp,
     required IconData icon,
     bool completed = false,
   }) {
-    return Row(
-      children: [
-        Icon(
-          completed ? Icons.check_circle : icon,
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: completed
+            ? AppColors.success.withOpacity(.08)
+            : AppColors.background,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        border: Border.all(
           color: completed
-              ? AppColors.success
-              : AppColors.primary,
+              ? AppColors.success.withOpacity(.25)
+              : AppColors.border,
         ),
-
-        const SizedBox(width: AppSpacing.md),
-
-        Expanded(
-          child: Text(
-            title,
-            style: AppTypography.bodyMedium,
+      ),
+      child: Row(
+        children: [
+          Icon(
+            completed ? Icons.check_circle : icon,
+            color: completed ? AppColors.success : AppColors.primary,
+            size: 28,
           ),
-        ),
-      ],
+
+          const SizedBox(width: AppSpacing.md),
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: AppTypography.bodyMedium.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  xp,
+                  style: AppTypography.bodySmall.copyWith(
+                    color: Colors.green,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          if (!completed)
+            const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 16,
+              color: Colors.grey,
+            ),
+        ],
+      ),
     );
   }
 }

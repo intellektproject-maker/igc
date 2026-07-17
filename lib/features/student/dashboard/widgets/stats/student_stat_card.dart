@@ -23,45 +23,139 @@ class StudentStatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(AppSpacing.lg),
+      constraints: const BoxConstraints(
+        minHeight: 190,
+      ),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.card),
+        border: Border.all(
+          color: AppColors.border,
+        ),
         boxShadow: const [
           AppShadows.small,
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          CircleAvatar(
-            radius: 22,
-            backgroundColor: iconBackground,
-            child: Icon(
-              icon,
+          Container(
+            width: 5,
+            decoration: BoxDecoration(
               color: iconColor,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(AppRadius.card),
+                bottomLeft: Radius.circular(AppRadius.card),
+              ),
             ),
           ),
 
-          const SizedBox(height: AppSpacing.md),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Top Row
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: iconBackground,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(
+                          icon,
+                          color: iconColor,
+                          size: 22,
+                        ),
+                      ),
 
-          Text(
-            title,
-            style: AppTypography.bodySmall,
-          ),
+                      const Spacer(),
 
-          const SizedBox(height: AppSpacing.xs),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green.withValues(alpha: .10),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.trending_up,
+                              color: Colors.green,
+                              size: 12,
+                            ),
+                            SizedBox(width: 2),
+                            Text(
+                              "+4%",
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
 
-          Text(
-            value,
-            style: AppTypography.headlineMedium,
-          ),
+                  const SizedBox(height: 20),
 
-          const SizedBox(height: AppSpacing.xs),
+                  // Value
+                  Text(
+                    value,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTypography.headlineLarge.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
 
-          Text(
-            subtitle,
-            style: AppTypography.bodySmall,
+                  const SizedBox(height: 4),
+
+                  // Title
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTypography.bodyMedium.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+
+                  const Spacer(),
+
+                  // Subtitle
+                  Text(
+                    subtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTypography.bodySmall.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: LinearProgressIndicator(
+                      value: 0.75,
+                      minHeight: 4,
+                      backgroundColor: Colors.grey.shade200,
+                      valueColor: AlwaysStoppedAnimation(iconColor),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

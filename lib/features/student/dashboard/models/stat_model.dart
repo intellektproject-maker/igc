@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
-class ActivityModel {
+class StatModel {
   final String title;
+  final String value;
   final String subtitle;
-  final String time;
-  final String badge;
   final IconData icon;
   final Color color;
 
-  const ActivityModel({
+  const StatModel({
     required this.title,
+    required this.value,
     required this.subtitle,
-    required this.time,
-    required this.badge,
     required this.icon,
     required this.color,
   });
